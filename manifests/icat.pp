@@ -11,8 +11,9 @@ class irods::icat (
 ) inherits irods::params {
 
   if $irods::icat::do_setup == true {
-    contain irods::setup
-    Irods::Install['icat'] ~> Class['irods::setup']
+    contain irods::icat_setup
+    Irods::Install['icat'] ~>
+    Class['irods::icat_setup']
   }
 
   irods::install { 'icat':

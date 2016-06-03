@@ -13,9 +13,10 @@ dependencies in Puppet. I believe RENCI is working on yum/apt
 repositories as part of the 4.2 release. In the meantime, you are on
 your own creating a repo and configuring the server to use it.
 
+This module does not manage firewall ports used by iRODS.
 
-
-Resource server setup requires an available, functional iCAT server.
+Resource server setup requires an available, functional iCAT server. So
+construct your Puppet manifests accordingly.
 
 ## Parameters
 
