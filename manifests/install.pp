@@ -4,30 +4,30 @@
 # irods::client is changed to irods::resource.
 define irods::install (
   $packages = undef,
-  $version  = $irods::params::version
+  $core_version  = $irods::params::core_version
 ) {
 
   if is_array($packages) {
-    $pkg_array = $packages
+    $install_pkgs = $packages
   } else {
-    $pkg_array = [$packages]
+    $install_pkgs = [$packages]
   }
 
   case $::osfamily {
     'RedHat': {
       $core_packages = $irods::params::core_packages
-      $rm_pkgs = difference($core_packages, $pkg_array)
+      $rm_pkgs = difference($core_packages, $install_pkgs)
     }
     default: {
       $rm_pkgs = []
     }
-  } 
+  }
 
   package { $rm_pkgs:
     ensure => absent,
   } ->
-  package { $pkg_array:
-    ensure => $version,
+  package { $install_pkgs:
+    ensure => $core_version,
   }
 
 }

@@ -1,9 +1,24 @@
 
-class irods::params {
+class irods::params inherits irods::globals {
 
-  $version = 'latest'
+  $db_vendor = 'postgres' # or oracle or mysql
+  $db_plugin_version    = '1.8-0' # not implemented
 
+  $db_name     = 'ICAT'
+  $db_user     = 'irods'
+  $db_password = 'irodspassword'
+  $db_srv_host = 'ies.vm'
+  $db_srv_port = '5432'
+
+  # Only one icat|resource|icommands package and one database plugin can
+  # be installed at a time. See the irods::install define type for how
+  # this list is used to ensure one of each is installed and the others
+  # are absent. This list is ordered so dependencies are handled first
+  # during any uninstallations.
   $core_packages = [
+    'irods-database-plugin-mysql',
+    'irods-database-plugin-oracle',
+    'irods-database-plugin-postgres',
     'irods-icat',
     'irods-resource',
     'irods-icommands',
@@ -12,12 +27,6 @@ class irods::params {
   case $::osfamily {
     'RedHat': {
       $os = "centos${::operatingsystemmajrelease}"
-      $prefix = "ftp://ftp.renci.org/pub/irods/releases/${version}"
-      $icat_pkg = "${prefix}/${os}/irods-icat-${version}-${os}-${::architecture}.rpm"
-      $resc_pkg = "${prefix}/${os}/irods-resource-${version}-${os}-${::architecture}.rpm"
-      $icmd_pkg = "${prefix}/${os}/irods-icommands-${version}-${os}-${::architecture}.rpm"  
-      # oracle plugin NA for EL 7 (June 1, 2016)
-      $orcl_pkg = "${prefix}/centos6/irods-database-plugin-oracle-1.8-centos6-${::architecture}.rpm"
     }
 
     default: {
