@@ -7,8 +7,10 @@ class irods::params inherits irods::globals {
   $db_name     = 'ICAT'
   $db_user     = 'irods'
   $db_password = 'irodspassword'
-  $db_srv_host = 'ies.vm'
+  $db_srv_host = 'localhost'
   $db_srv_port = '5432'
+
+  $do_setup    = true
 
   # Only one icat|resource|icommands package and one database plugin can
   # be installed at a time. See the irods::install define type for how

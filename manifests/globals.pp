@@ -7,11 +7,11 @@ class irods::globals (
   $default_vault_dir    = '/var/lib/irods/iRODS/Vault',
   $icat_admin_pass      = 'rods',
   $icat_admin_user      = 'rods',
-  $icat_server          = 'ies.vm',
+  $icat_server          = 'localhost',
   $icat_server_zone     = 'tempZone',
   $schema_base_uri      = 'https://schemas.irods.org/configuration',
-  $srv_acct             = 'rods',
-  $srv_grp              = 'rods',
+  $srv_acct             = 'rods',                                       # file, process owner
+  $srv_grp              = 'rods',                                       # file, process group
   $srv_negotiation_key  = 'TEMPORARY_32byte_negotiation_key',
   $srv_port             = '1247',
   $srv_port_range_end   = '20199',
@@ -19,4 +19,7 @@ class irods::globals (
   $srv_zone_key         = 'TEMPORARY_zone_key',
   $core_version         = 'installed' # support for specific version not implemented.
 ) {
+
+  include irods::ireinit
+
 }
