@@ -7,11 +7,12 @@
 # This is a EBRC custom script installed by ebrc-irods Puppet module,
 # not part of the iRODS package.
 
+this=`basename $0`
 
 USER=$1
 
 if [ -z "$USER" ]; then
-  echo "Usage: iinit.sh <irods_user>"
+  echo "Usage: ${this} <irods_user>"
   exit 1
 fi
 
