@@ -44,6 +44,24 @@ package). Same for database plugins - only one at a time.
 - You will need to deploy your iCAT server first because the resource server setup scripts
 requires a functional iCAT server for resource registration and testing.
 
+## Example Hiera
+
+Hiera is recommended for setting parameter values. The parameters in
+this example are the most important ones to tailor for your
+infrastructure.
+
+      irods::globals::icat_server: ies.irods.vm
+      irods::globals::ctrl_plane_key: E5460119-A64C-4EA5-9211-68D27691A1BE
+      irods::globals::icat_admin_pass: rods
+      irods::globals::srv_negotiation_key: rods
+      irods::globals::srv_zone_key: E885419B-B4F1-41E7-8E6D-112EF058E1DC
+      irods::globals::icat_server_zone: ebrc
+
+      irods::icat::db_vendor: postgres
+      irods::icat::db_name: ICAT
+      irods::icat::db_password: passWORD
+      irods::icat::db_srv_host: localhost
+
 ## Parameters
 
 Component-specific parameters are distributed among `irods::icat`,
