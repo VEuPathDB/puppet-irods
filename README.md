@@ -50,17 +50,18 @@ Hiera is recommended for setting parameter values. The parameters in
 this example are the most important ones to tailor for your
 infrastructure.
 
-      irods::globals::icat_server: ies.irods.vm
-      irods::globals::ctrl_plane_key: E5460119-A64C-4EA5-9211-68D27691A1BE
-      irods::globals::icat_admin_pass: rods
-      irods::globals::srv_negotiation_key: rods
-      irods::globals::srv_zone_key: E885419B-B4F1-41E7-8E6D-112EF058E1DC
-      irods::globals::icat_server_zone: ebrc
+    irods::globals::icat_server: ies.irods.vm
+    irods::globals::icat_server_zone: ebrc
+    irods::globals::icat_admin_user: rods
+    irods::globals::icat_admin_pass: rods
+    irods::globals::srv_negotiation_key: DED0045D-91F7-4BE7-AB32-3E485E0098FD
+    irods::globals::ctrl_plane_key: E5460119-A64C-4EA5-9211-68D27691A1BE
+    irods::globals::srv_zone_key: E885419B-B4F1-41E7-8E6D-112EF058E1DC
 
-      irods::icat::db_vendor: postgres
-      irods::icat::db_name: ICAT
-      irods::icat::db_password: passWORD
-      irods::icat::db_srv_host: localhost
+    irods::icat::db_vendor: postgres
+    irods::icat::db_name: ICAT
+    irods::icat::db_password: passWORD
+    irods::icat::db_srv_host: localhost
 
 ## Parameters
 
