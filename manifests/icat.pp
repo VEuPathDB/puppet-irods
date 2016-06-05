@@ -11,12 +11,12 @@ class irods::icat (
 ) inherits irods::params {
 
   if $irods::icat::do_setup == true {
-    contain irods::icat_setup
-    Irods::Install['icat'] ~>
-    Class['irods::icat_setup']
+    contain irods::icat::setup
+    Irods::Lib::Install['icat'] ~>
+    Class['irods::icat::setup']
   }
 
-  irods::install { 'icat':
+  irods::lib::install { 'icat':
     packages     => ['irods-icat', "irods-database-plugin-${db_vendor}"],
     core_version => $core_version,
   }

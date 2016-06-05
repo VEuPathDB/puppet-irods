@@ -20,6 +20,6 @@ class irods::globals (
   $core_version         = 'installed' # support for specific version not implemented.
 ) {
 
-  include irods::ireinit
+  include irods::contrib::ireinit
 
 }

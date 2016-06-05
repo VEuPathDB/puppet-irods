@@ -1,7 +1,7 @@
 # Install a custom script to init an iRODS session environment.
 # It's a substitute for the stock `iinit` script but this one
 # does not prompt for iCAT host, ports, etc.
-class irods::ireinit {
+class irods::contrib::ireinit {
 
   file { "/usr/local/bin/ireinit":
     ensure  => 'file',

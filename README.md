@@ -44,9 +44,9 @@ If you want setup to run after database or other changes, you can do
 manage that in your profile, something like
 
         if $irods::icat::do_setup == true {
-          include irods::setup
+          include irods::lib::setup
           Postgresql::Server::Db[$irods::icat::db_name] ~>
-          Class['irods::setup']
+          Class['irods::lib::setup']
         }
 
 will trigger setup to run after a password change. I do not know the

@@ -5,7 +5,7 @@
 # /var/lib/irods/iRODS/installLogs/irods_setup.log
 # making $setup_log_file superfluous in most/all cases.
 #
-define irods::setup (
+define irods::lib::setup (
   $setup_rsp_file = undef,
   $setup_rsp_tmpl = undef,
   $setup_log_file = 'irods_setup.log',

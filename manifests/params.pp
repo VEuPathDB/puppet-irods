@@ -13,7 +13,7 @@ class irods::params inherits irods::globals {
   $do_setup    = true
 
   # Only one icat|resource|icommands package and one database plugin can
-  # be installed at a time. See the irods::install define type for how
+  # be installed at a time. See the irods::lib::install define type for how
   # this list is used to ensure one of each is installed and the others
   # are absent. This list is ordered so dependencies are handled first
   # during any uninstallations.

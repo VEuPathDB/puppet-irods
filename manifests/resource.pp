@@ -5,12 +5,12 @@ class irods::resource (
 ) inherits irods::params {
 
   if $irods::resource::do_setup == true {
-    contain irods::resource_setup
-    Irods::Install['resource'] ~>
-    Class['irods::resource_setup']
+    contain irods::resource::setup
+    Irods::Lib::Install['resource'] ~>
+    Class['irods::resource::setup']
   }
 
-  irods::install { 'resource':
+  irods::lib::install { 'resource':
     packages     => ['irods-resource'],
     core_version => $core_version,
   }

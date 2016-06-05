@@ -2,7 +2,7 @@
 # icommands) so we have to try to ensure only one core package is
 # installed at at time - handling cases, for example, when an
 # irods::client is changed to irods::resource.
-define irods::install (
+define irods::lib::install (
   $packages = undef,
   $core_version  = $irods::params::core_version
 ) {
