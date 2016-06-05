@@ -54,9 +54,9 @@ infrastructure.
     irods::globals::icat_server_zone: ebrc
     irods::globals::icat_admin_user: rods
     irods::globals::icat_admin_pass: rods
-    irods::globals::srv_negotiation_key: DED0045D-91F7-4BE7-AB32-3E485E0098FD
-    irods::globals::ctrl_plane_key: E5460119-A64C-4EA5-9211-68D27691A1BE
-    irods::globals::srv_zone_key: E885419B-B4F1-41E7-8E6D-112EF058E1DC
+    irods::globals::srv_negotiation_key: fbb4c4fd185e3a98f8715ff5c1c86715
+    irods::globals::ctrl_plane_key: ca2ad0abf0faa703cf0829af99465ac9
+    irods::globals::srv_zone_key: e83ac54fe6d5d66f24d16644ce72d9ae
 
     irods::icat::db_vendor: postgres
     irods::icat::db_name: ICAT
@@ -81,7 +81,11 @@ _Parameter descriptions in italics are copied from the tutorial
 
 _A secret key shared by all servers._
 
-You should set this because the default is not a secret.
+You should set this because the default is not a secret. It must be
+exactly 32 bytes. One method for generating a random 32-byte string is
+with the command
+
+    openssl rand -hex 16
 
 #### `irods::globals::ctrl_plane_port`
 
@@ -143,7 +147,11 @@ This applies to iCAT and resource servers. The default is `irods`.
 
 _A secret key used in server-to-server communication._
 
-You should set this because the default is not a secret.
+You should set this because the default is not a secret. It must be
+exactly 32 bytes. One method for generating a random 32-byte string is
+with the command
+
+    openssl rand -hex 16
 
 #### `irods::globals::srv_port`
 
@@ -167,7 +175,11 @@ The default is `2000`.
 
 _A secret key used in server-to-server communication._
 
-You should set this because the default is not a secret.
+You should set this because the default is not a secret. It must be
+exactly 32 bytes. One method for generating a random 32-byte string is
+with the command
+
+    openssl rand -hex 16
 
 #### `irods::globals::core_version`
 
@@ -260,6 +272,23 @@ See the description for `irods::icat::do_setup`.
 None
 
 ## Tips
+
+#### Manually running iRODS setup.
+
+This module generates a response file that can be fed to the iRODS setup
+script in the event that you want to run setup manually.
+
+Before running setup, delete the `service_account.config` file if it exists.
+
+    rm /etc/irods/service_account.config
+
+Then run `setup_irods.sh` with the response file on the iCAT server
+
+    /var/lib/irods/packaging/setup_irods.sh < /var/lib/irods/.puppetstaging/ies-setup.rsp
+
+or with the response file on the resource server
+
+    /var/lib/irods/packaging/setup_irods.sh < /var/lib/irods/.puppetstaging/rs-setup.rsp
 
 #### Postgres and `irods::icat::db_srv_host`
 
