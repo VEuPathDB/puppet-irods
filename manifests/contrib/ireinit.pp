@@ -3,15 +3,15 @@
 # does not prompt for iCAT host, ports, etc.
 class irods::contrib::ireinit {
 
-  file { "/usr/local/bin/ireinit":
-    ensure  => 'file',
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0755',
-    source  => 'puppet:///modules/irods/ireinit',
+  file { '/usr/local/bin/ireinit':
+    ensure => 'file',
+    owner  => 'root',
+    group  => 'root',
+    mode   => '0755',
+    source => 'puppet:///modules/irods/ireinit',
   }
 
-  file { "/etc/ireinit.env":
+  file { '/etc/ireinit.env':
     ensure  => 'file',
     owner   => 'root',
     group   => 'root',
