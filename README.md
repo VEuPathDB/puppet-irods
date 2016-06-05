@@ -58,99 +58,99 @@ _Parameter descriptions in italics are copied from the tutorial
 
 ### irods::globals namespace parameters
 
-* irods::globals::ctrl_plane_key
+#### `irods::globals::ctrl_plane_key`
 
 _A secret key shared by all servers._
 
 You should set this because the default is not a secret.
 
-* irods::globals::ctrl_plane_port
+#### `irods::globals::ctrl_plane_port`
 
 _The port used for the control plane. The control plane receives status
 updates from all servers, and issues commands to servers to pause,
 resume, shut down, etc._
 
-* irods::globals::default_vault_dir
+#### `irods::globals::default_vault_dir`
 
 _The Vault (i.e., storage) location of the default unixfilesystem
 resource created during installation._
 
-* irods::globals::icat_admin_pass
+#### `irods::globals::icat_admin_pass`
 
 The password for the iRODS administration account
 (`irods::globals::icat_admin_user`). You should set this because the
 default is not a secret.
 
-* irods::globals::icat_admin_user
+#### `irods::globals::icat_admin_user`
 
 The name of the administration account used to manage iRODS through
 icommands and related. It will be created in the iRODS catalog during
 setup.
 
-* irods::globals::icat_server
+#### `irods::globals::icat_server`
 
 The hostname where the iRODS resource components and icommands can find
 the iCAT server. You almost certainly want set this. The default is
 `localhost`.
 
-* irods::globals::icat_server_zone
+#### `irods::globals::icat_server_zone`
 
 _The name of the iRODS zone._
 
 The default is `tempZone`. You probably will want to change this.
 
-* irods::globals::schema_base_uri
+#### `irods::globals::schema_base_uri`
 
 _The location of the schema files used to validate the server's configuration files._
 
 Typically you should use the default
 `https://schemas.irods.org/configuration`.
 
-* irods::globals::srv_acct
+#### `irods::globals::srv_acct`
 
 _The Linux account that will run the iRODS server software. The account
 will be created if it does not already exist._
 
 This applies to iCAT and resource servers. The default is `irods`.
 
-* irods::globals::srv_grp
+#### `irods::globals::srv_grp`
 
 _The primary group of the Linux account that will run the iRODS server
 software._
 
 This applies to iCAT and resource servers. The default is `irods`.
 
-* irods::globals::srv_negotiation_key
+#### `irods::globals::srv_negotiation_key`
 
 _A secret key used in server-to-server communication._
 
 You should set this because the default is not a secret.
 
-* irods::globals::srv_port
+#### `irods::globals::srv_port`
 
 _The main iRODS port._
 
 The default is 1247.
 
-* irods::globals::srv_port_range_end
+#### `irods::globals::srv_port_range_end`
 
 _The end of the port range used when transferring large files._
 
 The default is `20199`.
 
-* irods::globals::srv_port_range_start
+#### `irods::globals::srv_port_range_start`
 
 _The beginning of the port range used when transferring large files._
 
 The default is `2000`.
 
-* irods::globals::srv_zone_key
+#### `irods::globals::srv_zone_key`
 
 _A secret key used in server-to-server communication._
 
 You should set this because the default is not a secret.
 
-* irods::globals::core_version
+#### `irods::globals::core_version`
 
 Not implemented. This module will install the most recent version
 found in the YUM repo. It does not do any subsequent updates from new
@@ -158,22 +158,22 @@ versions added to the repo.
 
 ### irods::icat namespace parameters
 
-* irods::icat::core_version
+#### `irods::icat::core_version`
 
 Not implemented. This module will install the most recent version found
 in the YUM repo. It does not do any subsequent updates from new versions
 added to the repo.
 
-* irods::icat::db_vendor
+#### `irods::icat::db_vendor`
 
 One of 'postgres', 'oracle', 'mysql'. This determines which database
 plugin to install. The default is 'postgres'.
 
-* irods::icat::db_name
+#### `irods::icat::db_name`
 
 The name of the iCAT database. The default is `ICAT`.
 
-* irods::icat::db_user
+#### `irods::icat::db_user`
 
 The database user for connects to the iCAT database.
 
@@ -183,12 +183,12 @@ changing Postgres settings.
 
 The default is the value of `irods::globals::srv_acct`.
 
-* irods::icat::db_password
+#### `irods::icat::db_password`
 
 The password for the database user that iRODS uses to connect to the
 iCAT database. You should set this because the default is not a secret.
 
-* irods::icat::db_srv_host
+#### `irods::icat::db_srv_host`
 
 Host of the ICAT database. For example,
 
@@ -206,12 +206,12 @@ Therefore pay attention that your database configurations allow
 connections for your chosen host. See the Tips section for guidance when
 using Postgres for the ICAT database.
 
-* irods::icat::db_srv_port
+#### `irods::icat::db_srv_port`
 
 The port that the database listens for user connections. The
 default is PostgreSQL's port `5432`.
 
-* irods::icat::do_setup
+#### `irods::icat::do_setup`
 
 true or false. The default is `true`. This determines whether to run the
 irods setup script. If `true` the setup script will run when iRODS
@@ -232,7 +232,7 @@ cautious.
 
 ### irods::resource namespace parameters
 
-* irods::resource::do_setup
+#### `irods::resource::do_setup`
 
 See the description for `irods::icat::do_setup`.
 
