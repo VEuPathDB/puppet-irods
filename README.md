@@ -1,4 +1,14 @@
-The irods-icommands (irods::client), irods-icat (irods::icat) and
+## Usage
+
+    include irods::icat
+
+    include irods::resource
+
+    include irods::icommands
+
+
+
+The irods-icommands (irods::icommands), irods-icat (irods::icat) and
 irods-resource (irods::resource) duplicate files so can not be installed
 on same server. Same for database plugins - only one at a time
 
@@ -21,7 +31,7 @@ construct your Puppet manifests accordingly.
 ## Parameters
 
 Component-specific parameters are distributed among `irods::icat`,
-`irods::resource`, `irods::client` namespaces. Parameters that need to
+`irods::resource`, `irods::icommands` namespaces. Parameters that need to
 be shared among two or more components are defined in the
 `irods::globals` namespace.
 

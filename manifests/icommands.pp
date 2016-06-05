@@ -1,5 +1,5 @@
 # installs only the icommands
-class irods::client (
+class irods::icommands (
   $core_version = $irods::params::core_version,
 ) inherits irods::params {
 

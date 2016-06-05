@@ -1,7 +1,7 @@
 # The RENCI RPM packages contain overlapping files (especially the
 # icommands) so we have to try to ensure only one core package is
 # installed at at time - handling cases, for example, when an
-# irods::client is changed to irods::resource.
+# irods::icommands node is changed to a irods::resource node.
 define irods::lib::install (
   $packages = undef,
   $core_version  = $irods::params::core_version
