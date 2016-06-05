@@ -10,8 +10,8 @@ class irods::globals (
   $icat_server          = 'localhost',
   $icat_server_zone     = 'tempZone',
   $schema_base_uri      = 'https://schemas.irods.org/configuration',
-  $srv_acct             = 'rods',                                       # file, process owner
-  $srv_grp              = 'rods',                                       # file, process group
+  $srv_acct             = 'irods',                                       # file, process owner
+  $srv_grp              = 'irods',                                       # file, process group
   $srv_negotiation_key  = 'TEMPORARY_32byte_negotiation_key',
   $srv_port             = '1247',
   $srv_port_range_end   = '20199',

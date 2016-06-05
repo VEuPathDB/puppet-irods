@@ -5,7 +5,7 @@ class irods::params inherits irods::globals {
   $db_plugin_version    = '1.8-0' # not implemented
 
   $db_name     = 'ICAT'
-  $db_user     = 'irods'
+  $db_user     = $irods::globals::srv_acct
   $db_password = 'irodspassword'
   $db_srv_host = 'localhost'
   $db_srv_port = '5432'
