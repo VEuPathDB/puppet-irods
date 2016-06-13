@@ -319,3 +319,75 @@ If you are using `puppetlabs-postgres` module, you can create a rule like,
           order       => '001',
         }
 
+## iAdmin commands
+
+Experimental support for running `iadmin` commands is partially
+implemented. You probably do not want Puppet managing resources in
+production environments but it can be handy for virtualized
+development/testing environments.
+
+### Usage
+
+The desired iadmin commands are specified in the hiera `irods::iadmin`
+array of hashes. Each hash must have an `exec` key for the iadmin
+subcommand. Additional keys are provided as specific arguments for the
+subcommand. The iadmin commands are invoked in array order. The `exec`
+key maps to a Puppet define type in the `irods::lib::iadmin` namespace
+that controls the iadmin command. For example, `exec: mkresc` maps to
+the `irods::lib::iadmin::mkresc` Puppet define type. The subcommand
+argument keys must match the parameter names in the define type.
+
+    irods::iadmin:
+      - exec: mkresc
+        resc: data_7k_001
+        type: unixfilesystem
+        path: rs1.vm:/srv/irods/vault_7k_001
+      - exec: mkresc
+        resc: data_7k_002
+        type: unixfilesystem
+        path: rs1.vm:/srv/irods/vault_7k_002
+      - exec: mkresc
+        resc: data
+        type: roundrobin
+      - exec: addchildtoresc
+        resc: data
+        chld: data_7k_001
+      - exec: addchildtoresc
+        resc: data
+        chld: data_7k_002
+
+The filesystem paths are not created on the resource server. You will
+need to use other means to ensure those exist with correct permissions.
+See `irods::filesystem` for one option.
+
+### Writing new iadmin define types
+
+Not all iadmin subcommands have been implemented so you will need to
+write a new Puppet define type for any missing support that you need.
+See existing define types in the `irods::lib::iadmin` namespace for
+model examples.
+
+The `irods::iadmin` class includes resources to log in as the admin user
+(the one defined for `irods::globals::icat_admin_user`).
+
+Be sure to explicitly set the `HOME` environment variable to the directory where the
+`.irods/irods_environment.json` is located.
+
+    ...
+    environment => ["HOME=/root"],
+    ...
+
+## irods::filesystem
+
+The `irods::filesystem` class can be used to manage filesystem paths
+that back irods resources. This is not required; you can manage your
+backing stores anyway you want. The class takes a `paths` parameter that
+is an array of POSIX file paths. In hiera that could look like,
+
+    irods::filesystem::paths:
+      - /srv/irods
+      - /srv/irods/vault_7k_001
+      - /srv/irods/vault_7k_002
+
+(note the `/srv/irods` parent directory is also included to satisfy Puppet prerequisites).
+

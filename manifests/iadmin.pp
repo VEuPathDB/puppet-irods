@@ -1,3 +1,8 @@
+# collect the `irods::iadmin` array of hashes to instantiate appropriate
+# `irods::lib::iadmin` define types and add them to the catalog.
+#
+# Also log in as the iCAT admin to run iadmin commands.
+#
 class irods::iadmin {
 
   $iadmin_set = hiera_array('irods::iadmin', {})
@@ -18,6 +23,7 @@ class irods::iadmin {
     path        => ['/usr/bin','/bin'],
     environment => ["HOME=/root"],
     command     => "echo ${irods::globals::icat_admin_pass} | iinit",
+    unless      => 'iadmin lu > /dev/null 2>&1',
   }
 
 
