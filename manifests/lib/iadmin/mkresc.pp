@@ -6,8 +6,6 @@ define irods::lib::iadmin::mkresc (
   $ctxs = undef,
 ) {
 
-  notify{"IADMIN iadmin mkresc ${resc} type ${path} ${ctxs}": }
-
   exec { $name:
     path    => '/usr/bin',
     environment => ["HOME=/root"],
