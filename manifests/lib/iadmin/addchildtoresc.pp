@@ -1,15 +1,17 @@
 
-class irods::lib::iadmin::addchildtoresc (
+define irods::lib::iadmin::addchildtoresc (
   $resc = undef,
-  $type = undef,
-  $path = undef,
-  $ctxs = undef,
+  $chld = undef,
 ) {
 
-  exec { "${resc}_${type}_${path}_${ctxs}":
-    path    => '/usr/bin',
-    command => "iadmin addchildtoresc $resc type $path $ctxs",
-    onlyif  => "iadmin lr ${resc} |grep -q 'No rows found'"
+  notify{"IADMIN iadmin addchildtoresc ${resc} ${chld}": }
+  notify{"IADMIN iadmin lr ${chld} |grep -q 'resc_parent: ${resc}'": }
+
+  exec { $name:
+    path        => '/usr/bin',
+    environment => ["HOME=/root"],
+    command     => "iadmin addchildtoresc ${resc} ${chld}",
+    unless      => "iadmin lr ${chld} |grep -q 'resc_parent: ${resc}'"
   }
 
 }

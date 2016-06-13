@@ -1,13 +1,24 @@
+class irods::iadmin {
 
+  $iadmin_set = hiera_array('irods::iadmin', {})
+  iadmin_collect($iadmin_set)
 
-define irods::iadmin (
-  $exec = undef,
-  $args = undef,
-) {
+  file { '/root/.irods':
+    ensure => 'directory',
+    mode    => '0700',
+  } ->
 
- notify{ "IADMIN ,,, ${exec} ... ${args}":}
-#  irods::lib::iadmin::${exec} {
-#    args => $args,
-#  }
+  file { '/root/.irods/irods_environment.json':
+    ensure  => 'file',
+    content => template("irods/irods_environment.json.erb"),
+    mode    => '0600',
+  } ->
+
+  exec { 'irods_admin_iinit':
+    path        => ['/usr/bin','/bin'],
+    environment => ["HOME=/root"],
+    command     => "echo ${irods::globals::icat_admin_pass} | iinit",
+  }
+
 
 }

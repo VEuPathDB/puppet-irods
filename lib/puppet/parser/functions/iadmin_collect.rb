@@ -21,7 +21,6 @@ module Puppet::Parser::Functions
       end
 
       resource.instantiate_resource(self, p_resource)
-
       compiler.add_resource(self, p_resource)
 
     end
