@@ -2,8 +2,6 @@
 class irods::filesystem (
   $paths = []
 ) {
-
-  notify { "PATHS ${paths}":}
   
   $paths.each |$path| {
     file { $path:
