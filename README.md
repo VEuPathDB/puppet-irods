@@ -244,6 +244,9 @@ default is PostgreSQL's port `5432`.
 
 #### `irods::icat::do_setup`
 
+**This is currently required to be true. Several file dependencies will
+not be satisifed if set to false.**
+
 true or false. The default is `true`. This determines whether to run the
 irods setup script. If `true` the setup script will run when iRODS
 packages are installed.
@@ -318,6 +321,34 @@ If you are using `puppetlabs-postgres` module, you can create a rule like,
           auth_method => 'md5',
           order       => '001',
         }
+
+## SSL Setup
+
+#### `irods::lib::ssl` 
+
+Create SSL certificates signed by a third-party or internal CA.
+Self-signed certificates are not supported. Declare the
+`irods::lib::ssl` defined type with `ssl_certificate_chain_file_source`
+and `ssl_certificate_key_file_source` parameters.
+
+      irods::lib::ssl { 'resource':
+        ssl_certificate_chain_file_source =>
+          "puppet:///modules/profiles/ssl/${hostname}-rsa.crt",
+        ssl_certificate_key_file_source   =>
+          "puppet:///modules/profiles/ssl/${hostname}-rsa.key",
+      }
+
+You will want to make sure the CA is installed on the system, especially
+if using an internal CA. For example, puppet module
+`jlambert121/trusted_ca` is useful for managing that.
+
+## PAM Setup
+
+Configuring iRODS to use PAM depends on your specific environment. For
+example, do you want to use /etc/passwd or LDAP? In the case of LDAP,
+there are dependencies on how your directory is configured and whether
+you want to use LDAP only for iRODS or also for system logins.
+Therefore, this module does not attempt any PAM configuration.
 
 ## iAdmin commands
 

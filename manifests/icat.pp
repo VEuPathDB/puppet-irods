@@ -8,17 +8,26 @@ class irods::icat (
   $db_srv_host = $irods::params::db_srv_host,
   $db_srv_port = $irods::params::db_srv_port,
   $do_setup    = $irods::params::do_setup,
+  $use_ssl     = $irods::globals::use_ssl,
 ) inherits irods::params {
 
-  if $irods::icat::do_setup == true {
-    contain irods::icat::setup
-    Irods::Lib::Install['icat'] ~>
-    Class['irods::icat::setup']
-  }
+  include ::irods::service
+
+  contain irods::icat::setup
+  Irods::Lib::Install['icat'] ~>
+  Class['irods::icat::setup'] ->
+  Irods::Lib::Ssl['icat']
 
   irods::lib::install { 'icat':
     packages     => ['irods-icat', "irods-database-plugin-${db_vendor}"],
     core_version => $core_version,
+  }
+
+  if $use_ssl {
+    irods::lib::ssl { 'icat':
+      ssl_certificate_chain_file_source => $irods::globals::ssl_certificate_chain_file_source,
+      ssl_certificate_key_file_source   => $irods::globals::ssl_certificate_key_file_source,
+    }
   }
 
 }

@@ -4,9 +4,9 @@
   "author": "ebrc",
   "summary": "Install iRODS client, iCAT server, resource server",
   "license": "Apache-2.0",
-  "source": "",
-  "project_page": null,
-  "issues_url": null,
+  "source": "https://github.com/EuPathDB/puppet-irods",
+  "project_page": "https://github.com/EuPathDB/puppet-irods",
+  "issues_url": "https://github.com/EuPathDB/puppet-irods/issues",
   "dependencies": [
     {"name":"puppetlabs-stdlib","version_requirement":">= 1.0.0"}
   ]
