@@ -264,6 +264,17 @@ will trigger setup to run after a password change. I do not know the
 safety of running setup on an existing production instance, so be
 cautious.
 
+#### `irods::icat::re_rulebase_set`
+
+An ordered array of values for `re_rulebase_set` in `/etc/irods/server_config.json`.
+
+The default is `['core']`. The `re_rulebase_set` is generated from this
+array so you should typically include `'core'`.
+
+You are responsible for ensuring the rulebase file is installed to
+`/etc/irods` (I believe it is ok to install after iCAT is installed, so
+the `/etc/irods` directory will exist).
+
 ### irods::resource namespace parameters
 
 #### `irods::resource::do_setup`
@@ -390,6 +401,15 @@ argument keys must match the parameter names in the define type.
 The filesystem paths are not created on the resource server. You will
 need to use other means to ensure those exist with correct permissions.
 See `irods::filesystem` for one option.
+
+Note that the commands are executed in order, as is. There is no attempt
+to manage the full consistency of resources. That is, for example, if
+you were to change the name of the `data` resource to `dataResc` in the
+above example, the Puppet module will not be smart enough to remove
+`data_7k_001` from `data` and then add it to `dataResc`. It will
+silently fail to `addchildtoresc dataResc data_7k_001`, because
+`data_7k_001` is already a child of `data`, unless you manually
+`rmchildfromresc` ahead of time.
 
 ### Writing new iadmin define types
 
