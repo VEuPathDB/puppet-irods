@@ -1,6 +1,5 @@
 # Class for setting cross-class global overrides.
-# Hiera,
-#       irods::globals::admin_password
+#
 class irods::globals (
   $ctrl_plane_key                    = 'TEMPORARY__32byte_ctrl_plane_key',
   $ctrl_plane_port                   = '1248',
@@ -15,8 +14,8 @@ class irods::globals (
   $srv_grp                           = 'irods',                                       # file & process group
   $srv_negotiation_key               = 'TEMPORARY_32byte_negotiation_key',
   $srv_port                          = '1247',
-  $srv_port_range_end                = '20199',
   $srv_port_range_start              = '20000',
+  $srv_port_range_end                = '20199',
   $srv_zone_key                      = 'TEMPORARY_zone_key',
   $use_ssl                           = false,
   $ssl_certificate_chain_file_source = '',
