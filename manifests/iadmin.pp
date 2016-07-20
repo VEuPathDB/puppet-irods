@@ -3,9 +3,11 @@
 #
 # Also log in as the iCAT admin to run iadmin commands.
 #
-class irods::iadmin {
+class irods::iadmin (
+  $iadmin_set = hiera_array('irods::iadmin', []),
+) {
 
-  $iadmin_set = hiera_array('irods::iadmin', {})
+
   iadmin_collect($iadmin_set)
 
   file { '/root/.irods':
