@@ -9,7 +9,7 @@ module Puppet::Parser::Functions
 
     exec_set.each do |entry|
 
-      type_name = 'irods::lib::iadmin::' + entry['exec']
+      type_name = 'irods::lib::icommands::' + entry['exec']
       resource = find_definition(type_name.downcase)
       title = entry.values.join('_')
       entry.delete('exec')

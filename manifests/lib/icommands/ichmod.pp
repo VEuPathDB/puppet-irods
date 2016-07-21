@@ -7,7 +7,7 @@
 #  -V  Very verbose
 #  -M  Admin Mode
 #  -h  this help
-define irods::lib::iadmin::ichmod (
+define irods::lib::icommands::ichmod (
   Enum[
     'null',
     'read',
@@ -31,10 +31,10 @@ define irods::lib::iadmin::ichmod (
   $zone    = $::irods::globals::icat_server_zone
 
   case $action {
-    inherit:   {
+    'inherit':   {
       $exec_check = "ils -A ${collOrDataObj} | grep -q 'Inheritance - Enabled'"
     }
-    noinherit: {
+    'noinherit': {
       $exec_check = "ils -A ${collOrDataObj} | grep -q 'Inheritance - Disabled'"
     }
     default: {
@@ -42,16 +42,11 @@ define irods::lib::iadmin::ichmod (
     }
   }
 
-
-    #notify { "CHECK ${exec_check}": }
-
-    #notify { "COMMAND ${command}":}
-
   exec { $name:
     path        => '/usr/bin',
-    environment => ["HOME=/root"],
-    command     => "$command; echo $command >> /var/lib/irods/.puppet_iadmin.log",
-    unless      => $exec_check
+    environment => ['HOME=/root'],
+    command     => "${command}; echo ${command} >> /var/lib/irods/.puppet_icommands.log",
+    unless      => $exec_check,
   }
 
 }

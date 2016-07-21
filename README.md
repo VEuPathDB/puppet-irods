@@ -6,7 +6,7 @@ Use one and only one of the following classes per server.
 
     include irods::resource
 
-    include irods::icommands
+    include irods::client
 
 Deploying the iCAT server will also include resource and icommand
 components, and the resource server includes icommands, so there is no
@@ -66,7 +66,7 @@ infrastructure.
 ## Parameters
 
 Component-specific parameters are distributed among `irods::icat`,
-`irods::resource`, `irods::icommands` namespaces. Parameters that need to
+`irods::resource`, `irods::client` namespaces. Parameters that need to
 be shared among two or more components are defined in the
 `irods::globals` namespace.
 
@@ -281,7 +281,7 @@ the `/etc/irods` directory will exist).
 
 See the description for `irods::icat::do_setup`.
 
-### irods::icommands namespace parameters
+### irods::client namespace parameters
 
 None
 
@@ -370,16 +370,16 @@ development/testing environments.
 
 ### Usage
 
-The desired iadmin commands are specified in the hiera `irods::iadmin`
+The desired iadmin commands are specified in the hiera `irods::icommands`
 array of hashes. Each hash must have an `exec` key for the iadmin
 subcommand. Additional keys are provided as specific arguments for the
 subcommand. The iadmin commands are invoked in array order. The `exec`
-key maps to a Puppet define type in the `irods::lib::iadmin` namespace
+key maps to a Puppet define type in the `irods::lib::icommands` namespace
 that controls the iadmin command. For example, `exec: mkresc` maps to
-the `irods::lib::iadmin::mkresc` Puppet define type. The subcommand
+the `irods::lib::icommands::mkresc` Puppet define type. The subcommand
 argument keys must match the parameter names in the define type.
 
-    irods::iadmin:
+    irods::icommands:
       - exec: mkresc
         resc: data_7k_001
         type: unixfilesystem
@@ -415,10 +415,10 @@ silently fail to `addchildtoresc dataResc data_7k_001`, because
 
 Not all iadmin subcommands have been implemented so you will need to
 write a new Puppet define type for any missing support that you need.
-See existing define types in the `irods::lib::iadmin` namespace for
+See existing define types in the `irods::lib::icommands` namespace for
 model examples.
 
-The `irods::iadmin` class includes resources to log in as the admin user
+The `irods::icommands` class includes resources to log in as the admin user
 (the one defined for `irods::globals::icat_admin_user`).
 
 Be sure to explicitly set the `HOME` environment variable to the directory where the
