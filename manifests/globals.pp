@@ -20,7 +20,8 @@ class irods::globals (
   $use_ssl                           = false,
   $ssl_certificate_chain_file_source = '',
   $ssl_certificate_key_file_source   = '',
-  $core_version                      = 'installed' # support for specific version not implemented.
+  $core_version                      = 'installed', # support for specific version not implemented.
+  $install_dev_pkgs                  = true,
 ) {
 
   include ::irods::contrib::ireinit

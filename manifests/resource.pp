@@ -1,8 +1,9 @@
 # installs resource server
 class irods::resource (
-  $core_version = $irods::params::core_version,
-  $do_setup     = $irods::params::do_setup,
-  $use_ssl      = $irods::globals::use_ssl,
+  String    $core_version     = $irods::params::core_version,
+  Boolean   $do_setup         = $irods::params::do_setup,
+  Boolean   $use_ssl          = $irods::globals::use_ssl,
+  Boolean   $install_dev_pkgs = $irods::globals::install_dev_pkgs,
 ) inherits irods::params {
 
   include ::irods::service
@@ -12,8 +13,15 @@ class irods::resource (
   Class['irods::resource::setup'] ->
   Irods::Lib::Ssl['resource']
 
+  $min_packages = ['irods-resource']
+  if $install_dev_pkgs {
+    $packages = concat($min_packages, ['irods-dev', 'irods-runtime'])
+  } else {
+    $packages = $min_packages
+  }
+
   irods::lib::install { 'resource':
-    packages     => ['irods-resource'],
+    packages     => $packages,
     core_version => $core_version,
   }
 

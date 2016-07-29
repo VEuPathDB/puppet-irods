@@ -26,6 +26,7 @@ class irods::params inherits irods::globals {
     'irods-database-plugin-mysql',
     'irods-database-plugin-oracle',
     'irods-database-plugin-postgres',
+    'irods-dev',
     'irods-icat',
     'irods-resource',
     'irods-icommands',
