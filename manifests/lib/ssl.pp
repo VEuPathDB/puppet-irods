@@ -31,24 +31,24 @@ define irods::lib::ssl (
   }
 
   File {
-    owner   => $irods::globals::srv_acct,
-    group   => $irods::globals::srv_grp,
-    mode    => '0640',
-    notify  => Service['irods'],
+    owner  => $irods::globals::srv_acct,
+    group  => $irods::globals::srv_grp,
+    mode   => '0640',
+    notify => Service['irods'],
   }
 
-  file { "/etc/irods/ssl":
+  file { '/etc/irods/ssl':
     ensure  => 'directory',
   } ->
 
-  file { "/etc/irods/ssl/server.key":
-    ensure  => 'file',
-    source  => $ssl_certificate_key_file_source,
+  file { '/etc/irods/ssl/server.key':
+    ensure => 'file',
+    source => $ssl_certificate_key_file_source,
   } ->
 
-  file { "/etc/irods/ssl/server.crt":
-    ensure  => 'file',
-    source  => $ssl_certificate_chain_file_source,
+  file { '/etc/irods/ssl/server.crt':
+    ensure => 'file',
+    source => $ssl_certificate_chain_file_source,
   } ->
 
   exec { 'generate /etc/irods/ssl/dhparams.pem':

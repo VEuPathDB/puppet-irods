@@ -8,7 +8,7 @@ class irods::resource (
 
   include ::irods::service
 
-  contain irods::resource::setup
+  contain ::irods::resource::setup
   Irods::Lib::Install['resource'] ~>
   Class['irods::resource::setup'] ->
   Irods::Lib::Ssl['resource']
