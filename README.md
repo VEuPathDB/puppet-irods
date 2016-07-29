@@ -242,6 +242,11 @@ using Postgres for the ICAT database.
 The port that the database listens for user connections. The
 default is PostgreSQL's port `5432`.
 
+#### `irods::icat::install_dev_pkgs`
+
+true or false. The default is `true`. This determines whether or not to
+install the irods-dev and irods-runtime packages.
+
 #### `irods::icat::do_setup`
 
 **This is currently required to be true. Several file dependencies will
