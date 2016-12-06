@@ -54,6 +54,17 @@ define irods::lib::setup (
     path        => '/bin:/usr/bin',
     command     => "${setup_sh_desudo} < ${staging_dir}/${setup_rsp_file} > ${$staging_dir}/${setup_log_file} 2>&1",
     refreshonly => true,
-  }
+  } ->
 
+  # the setup script starts the server into a state that systemd
+  # does not recognize. Stop the server ...
+  exec { 'irods-icat-postsetup-stop':
+    path        => '/bin:/usr/bin',
+    user        => $irods::globals::srv_acct,
+    command     => "${irods::globals::irods_home}/iRODS/irodsctl stop",
+    refreshonly => true,
+  } ->
+
+  # then start it using systemd
+  Service['irods']
 }
