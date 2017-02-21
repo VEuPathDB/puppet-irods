@@ -1,9 +1,8 @@
 # Run the iRODS interactive setup script, taking inputs from a response
 # file. The response file is different on iCAT and resource servers.
 #
-# The setup script creates a log in
-# /var/lib/irods/iRODS/installLogs/irods_setup.log
-# making $setup_log_file superfluous in most/all cases.
+# Logging to $setup_log_file. The setup script also creates a log in
+# /var/lib/irods/log/setup_log.txt
 #
 define irods::lib::setup (
   $setup_rsp_file = undef,
@@ -12,8 +11,8 @@ define irods::lib::setup (
 ) {
 
   $staging_dir     = '/var/lib/irods/.puppetstaging'
-  $setup_sh_sudo   = '/var/lib/irods/packaging/setup_irods.sh'
-  $setup_sh_desudo = "/var/lib/irods/packaging/setup_irods_for_puppet_${module_name}_module.sh"
+  $setup_py        = '/var/lib/irods/scripts/setup_irods.py'
+  $db_vendor       = $::irods::icat::db_vendor
 
   file { $staging_dir:
     ensure => 'directory',
@@ -26,45 +25,10 @@ define irods::lib::setup (
     mode    => '0600',
   } ->
 
-  # remove 'sudo' from setup script to work around "must have a tty to
-  # run sudo" errors when running in Puppet environemnt.
-  exec { 'remove_sudo_from_setup_sh':
-    path        => '/bin:/usr/bin',
-    command     => "sed 's/sudo //' < ${setup_sh_sudo} > ${setup_sh_desudo}; chmod 755 ${setup_sh_desudo}",
-    refreshonly => true,
-  } ->
-
-  exec { 'document_custom_setup_sh':
-    path        => '/bin:/usr/bin',
-    command     => "sed -i '2i # This is ${setup_sh_sudo} customized\\n# for use by the ${module_name} Puppet module' ${setup_sh_desudo}",
-    refreshonly => true,
-  } ->
-
-  # The service_account.config needs to be remove to ensure the setup
-  # script does not skip questions and get out of sync with inputs from
-  # the response file.
-  exec { 'remove_account_config':
-    path        => '/bin:/usr/bin',
-    command     => 'rm /etc/irods/service_account.config',
-    onlyif      => 'test -f /etc/irods/service_account.config',
-    refreshonly => true,
-  } ->
-
   exec { 'irods-icat-setup':
-    path        => '/bin:/usr/bin',
-    command     => "${setup_sh_desudo} < ${staging_dir}/${setup_rsp_file} > ${$staging_dir}/${setup_log_file} 2>&1",
-    refreshonly => true,
-  } ->
+    path        => '/bin:/usr/bin:/sbin:/usr/sbin',
+    command     => "python ${setup_py} < ${staging_dir}/${setup_rsp_file} > ${$staging_dir}/${setup_log_file} 2>&1",
+    unless      => 'test -f /etc/irods/server_config.json'
+  } 
 
-  # the setup script starts the server into a state that systemd
-  # does not recognize. Stop the server ...
-  exec { 'irods-icat-postsetup-stop':
-    path        => '/bin:/usr/bin',
-    user        => $irods::globals::srv_acct,
-    command     => "${irods::globals::irods_home}/iRODS/irodsctl stop",
-    refreshonly => true,
-  } ->
-
-  # then start it using systemd
-  Service['irods']
 }

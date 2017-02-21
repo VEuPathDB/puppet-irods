@@ -1,6 +1,28 @@
 # Take list of hashes of iRODS iadmin command and parameters. For each
 # 'exec' key add a define type for that key value to the catalog and set
 # 'require' dependency on the previous resource created.
+#
+# For example, hiera data
+#     irods::icommands:
+#       - { exec: mkresc, resc: ebrcResc, type: passthru }
+#       - { exec: mkresc, resc: rr1Resc, type: roundrobin }
+#
+# In manifest
+#      $iadmin_set = hiera_array('irods::icommands', [])
+#      iadmin_collect($iadmin_set)
+#
+# dynamically generates the equivalent of
+#
+#     irods::lib::icommands::mkresc { 'mkresc_ebrcResc_passthru':
+#
+#     }
+#     irods::lib::icommands::mkresc { 'mkresc_rr1Resc_roundrobin':
+#       require => Irods::Lib::Icommands::Mkresc['mkresc_ebrcResc_passthru']
+#     }
+#
+# The defined type, 'irods::lib::icommands::mkresc' in this example, must
+# exist.
+#
 module Puppet::Parser::Functions
   newfunction(:iadmin_collect) do |args|
     exec_set = args[0]

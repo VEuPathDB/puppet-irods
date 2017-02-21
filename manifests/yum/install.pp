@@ -1,6 +1,4 @@
-# install from YUM
-# This is incomplete. RENCI does not yet have relevant packages
-# in the repo (as of June 1, 2016)
+# Setup RENCI YUM repo.
 class irods::yum::install {
   $gpg_key_path =  '/etc/pki/rpm-gpg/RPM-GPG-KEY-RENCI-IRODS'
 

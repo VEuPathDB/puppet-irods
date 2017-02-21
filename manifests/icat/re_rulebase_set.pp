@@ -5,13 +5,14 @@ class irods::icat::re_rulebase_set {
   $re_rulebase_set = $::irods::icat::re_rulebase_set
   $server_config_json = $::irods::params::server_config_json
 
+  $path = "dict/entry[.= 'plugin_configuration']/dict/entry[.= 'rule_engines']/array/dict/entry[.= 'plugin_specific_configuration']/dict/entry[.= 're_rulebase_set']"
+
   $augeas_set_template = @(END)
-  rm  dict/entry[.= 're_rulebase_set']/array/dict
+  rm  <%= @path %>/array
   <% if @re_rulebase_set and not @re_rulebase_set.empty? %>
     <% @re_rulebase_set.each_with_index do |value, ar_idx| %>
       <% dict_idx = ar_idx +1 %>
-      set dict/entry[.= 're_rulebase_set']/array/dict[<%= dict_idx %>]/entry 'filename'
-      set dict/entry[.= 're_rulebase_set']/array/dict[<%= dict_idx %>]/entry/string <%= value %>
+      set <%= @path %>/array/string[<%= dict_idx %>] '<%= value %>'
     <% end %>
   <% end %>
 END

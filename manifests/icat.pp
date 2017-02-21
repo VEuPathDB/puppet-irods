@@ -17,14 +17,15 @@ class irods::icat (
   include ::irods::icat::re_rulebase_set
 
   contain ::irods::icat::setup
+  
   Irods::Lib::Install['icat'] ~>
   Class['irods::icat::setup'] ->
   Class['irods::icat::re_rulebase_set'] ->
   Irods::Lib::Ssl['icat']
 
-  $min_packages = ['irods-icat', "irods-database-plugin-${db_vendor}"]
+  $min_packages = ['irods-server', 'irods-runtime', 'irods-icommands', "irods-database-plugin-${db_vendor}"]
   if $install_dev_pkgs {
-    $packages = concat($min_packages, ['irods-dev', 'irods-runtime'])
+    $packages = concat($min_packages, ['irods-devel'])
   } else {
     $packages = $min_packages
   }

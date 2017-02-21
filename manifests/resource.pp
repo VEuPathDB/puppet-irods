@@ -15,7 +15,7 @@ class irods::resource (
 
   $min_packages = ['irods-resource']
   if $install_dev_pkgs {
-    $packages = concat($min_packages, ['irods-dev', 'irods-runtime'])
+    $packages = concat($min_packages, ['irods-devel', 'irods-runtime'])
   } else {
     $packages = $min_packages
   }

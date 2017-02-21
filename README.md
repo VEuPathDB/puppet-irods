@@ -245,7 +245,7 @@ default is PostgreSQL's port `5432`.
 #### `irods::icat::install_dev_pkgs`
 
 true or false. The default is `true`. This determines whether or not to
-install the irods-dev and irods-runtime packages.
+install the irods-devel and irods-runtime packages.
 
 #### `irods::icat::do_setup`
 

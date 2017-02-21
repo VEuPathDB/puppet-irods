@@ -1,4 +1,8 @@
-# addchildtoresc Parent Child [ContextString] (add child to resource)
+# Add child to resource.
+#
+# Usage
+#   addchildtoresc Parent Child [ContextString]
+#
 # Add a child resource to a parent resource.  This creates an 'edge'
 # between two nodes in a resource tree.
 # 
@@ -10,15 +14,17 @@
 define irods::lib::icommands::addchildtoresc (
   $resc = undef,
   $chld = undef,
+  $ctxs = undef,
 ) {
 
-  $command = "iadmin addchildtoresc ${resc} ${chld}"
+  $command = "iadmin addchildtoresc ${resc} ${chld} $ctxs"
+
+  $exec_check = "iadmin lr ${chld} |grep  \"resc_parent: $(iadmin lr ${resc} | grep resc_id: | cut -d' ' -f2)$\""
 
   exec { $name:
     path        => '/usr/bin',
     environment => ['HOME=/root'],
     command     => "${command}; echo ${command} >> /var/lib/irods/.puppet_icommands.log",
-    unless      => "iadmin lr ${chld} |grep -q 'resc_parent: ${resc}'",
+    unless      => $exec_check,
   }
-
 }

@@ -11,13 +11,17 @@ class irods::params inherits irods::globals {
   $db_password       = 'irodspassword'
   $db_srv_host       = 'localhost'
   $db_srv_port       = '5432'
-
+  $db_password_salt  = 'irodsPKey'
   $do_setup = true
 
   $re_rulebase_set = ['core']
   $server_config_json = '/etc/irods/server_config.json'
 
-  # Only one icat|resource|icommands package and one database plugin can
+  # install and use RENCI package repository
+  # (only available for iRODS >= 4.2)
+  $manage_repo = true
+
+  # Only one irods-server|icommands package and one database plugin can
   # be installed at a time. See the irods::lib::install define type for how
   # this list is used to ensure one of each is installed and the others
   # are absent. This list is ordered so dependencies are handled first
@@ -26,9 +30,8 @@ class irods::params inherits irods::globals {
     'irods-database-plugin-mysql',
     'irods-database-plugin-oracle',
     'irods-database-plugin-postgres',
-    'irods-dev',
-    'irods-icat',
-    'irods-resource',
+    'irods-devel',
+    'irods-server',
     'irods-icommands',
   ]
 
