@@ -2,7 +2,7 @@
 # appropriate `irods::lib::icommands` define types and add them to the
 # catalog.
 #
-# Also log in as the iCAT admin to run iadmin commands.
+# Also log in as the irods admin to run iadmin commands.
 #
 class irods::icommands (
   $iadmin_set = hiera_array('irods::icommands', []),

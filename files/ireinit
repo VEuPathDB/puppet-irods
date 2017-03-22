@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Run iRODS iinit for given user. This scripts gets iCAT host and zone
+# Run iRODS iinit for given user. This script gets iCAT host and zone
 # values from /etc/ireinit.env. Useful for quickly logging into the
 # default zone or for changing users in tutorial exercises.
 #
@@ -27,10 +27,10 @@ iexit full
 rm -f ~/.irods/irods_environment.json
 
 echo | iinit >/dev/null 2> >(grep -v 'Inappropriate ioctl') <<EOF
-$ICAT_SERVER_HOST
-$ICAT_SERVER_PORT
+$PROVIDER_SERVER_HOST
+$PROVIDER_SERVER_PORT
 $1
-$ICAT_SERVER_ZONE
+$PROVIDER_SERVER_ZONE
 $PASSWD
 EOF
 

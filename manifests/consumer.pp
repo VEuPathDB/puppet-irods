@@ -13,7 +13,6 @@ class irods::consumer (
   Class['irods::consumer::setup'] ->
   Irods::Lib::Ssl['consumer']
 
-  #  $min_packages = ['irods-resource']
   $min_packages = ['irods-server', 'irods-icommands']
   if $install_dev_pkgs {
     $packages = concat($min_packages, ['irods-devel', 'irods-runtime'])

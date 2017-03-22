@@ -4,12 +4,12 @@ Use one and only one of the following classes per server.
 
     include irods::provider
 
-    include irods::resource
+    include irods::consumer
 
     include irods::client
 
-Deploying the iCAT server will also include resource and icommand
-components, and the resource server includes icommands, so there is no
+Deploying the provider server will also include consumer and icommand
+components, and the consumer server includes icommands, so there is no
 need to include more than one class on a node.
 
 ## Database Prerequisite
@@ -27,22 +27,11 @@ values set for this module's `irods::provider::db_vendor`,
 
 - Only the RedHat OS family is supported at this time.
 
-- The [binary distribution packages](http://irods.org/download/) must be
-in an apt/yum repository; this module does not support installing
-packages from RENCI's FTP server because it's too difficult for Puppet
-to manage package dependencies. I believe RENCI is working on yum/apt
-repositories as part of the 4.2 release. In the meantime, you are on
-your own creating a repo and configuring the server to use it.
-
-- The RPM packages for irods-icommands, irods-provider and irods-resource each
-contain icommand executables so only one can be installed on a server
-(rpm complains of conflicting files if you try to install more that noe
-package). Same for database plugins - only one at a time.
-
 - This module does not manage firewall ports used by iRODS.
 
-- You will need to deploy your iCAT server first because the resource server setup scripts
-requires a functional iCAT server for resource registration and testing.
+- You will need to deploy your provider server first because the consumer
+  server setup scripts requires a functional provider server for resource
+  registration and testing.
 
 ## Example Hiera
 
@@ -66,7 +55,7 @@ infrastructure.
 ## Parameters
 
 Component-specific parameters are distributed among `irods::provider`,
-`irods::resource`, `irods::client` namespaces. Parameters that need to
+`irods::consumer`, `irods::client` namespaces. Parameters that need to
 be shared among two or more components are defined in the
 `irods::globals` namespace.
 
@@ -113,7 +102,7 @@ setup.
 #### `irods::globals::provider_server`
 
 The hostname where the iRODS resource components and icommands can find
-the iCAT server. You almost certainly want set this. The default is
+the provider server. You almost certainly want set this. The default is
 `localhost`.
 
 #### `irods::globals::provider_server_zone`
@@ -141,7 +130,7 @@ This applies to iCAT and resource servers. The default is `irods`.
 _The primary group of the Linux account that will run the iRODS server
 software._
 
-This applies to iCAT and resource servers. The default is `irods`.
+This applies to provider and consumer servers. The default is `irods`.
 
 #### `irods::globals::srv_negotiation_key`
 
@@ -228,7 +217,7 @@ Host of the ICAT database. For example,
   - 127.0.0.1
 
 The default is `localhost` and that should be
-sufficient if the database and iCAT software are colocated on the same
+sufficient if the database and provider software are colocated on the same
 server.
 
 Be aware that for some databases connecting to `localhost` will attempt
@@ -307,7 +296,7 @@ Then run `setup_irods.sh` with the response file on the iCAT server
 
 or with the response file on the resource server
 
-    /var/lib/irods/packaging/setup_irods.sh < /var/lib/irods/.puppetstaging/rs-setup.rsp
+    /var/lib/irods/packaging/setup_irods.sh < /var/lib/irods/.puppetstaging/consumer-setup.rsp
 
 #### Postgres and `irods::provider::db_srv_host`
 

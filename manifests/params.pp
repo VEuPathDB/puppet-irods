@@ -1,5 +1,5 @@
-# Default parameters for iCAT or Resource servers. These are meant to be
-# overridden in irods::provider or irods::resource classes. See also the
+# Default parameters for provider or consumer servers. These are meant to be
+# overridden in irods::provider or irods::consumer classes. See also the
 # irods::globals class for parameters that cross provider and resource class
 # boundaries.
 class irods::params inherits irods::globals {
@@ -21,11 +21,10 @@ class irods::params inherits irods::globals {
   # (only available for iRODS >= 4.2)
   $manage_repo = true
 
-  # Only one irods-server|icommands package and one database plugin can
-  # be installed at a time. See the irods::lib::install define type for how
-  # this list is used to ensure one of each is installed and the others
-  # are absent. This list is ordered so dependencies are handled first
-  # during any uninstallations.
+  # Only one database plugin can be installed at a time. See the
+  # irods::lib::install define type for how this list is used to ensure one of
+  # each is installed and the others are absent. This list is ordered so
+  # dependencies are handled first during any uninstallations.
   $core_packages = [
     'irods-database-plugin-mysql',
     'irods-database-plugin-oracle',

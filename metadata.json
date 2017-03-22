@@ -2,7 +2,7 @@
   "name": "ebrc/irods",
   "version": "0.1.0",
   "author": "ebrc",
-  "summary": "Install iRODS client, iCAT server, resource server",
+  "summary": "Install iRODS client, provider server, consumer server",
   "license": "Apache-2.0",
   "source": "https://github.com/EuPathDB/puppet-irods",
   "project_page": "https://github.com/EuPathDB/puppet-irods",
