@@ -5,10 +5,10 @@ class irods::globals (
   $ctrl_plane_port                   = '1248',
   $irods_home                        = '/var/lib/irods',
   $default_vault_dir                 = '/var/lib/irods/Vault',
-  $icat_admin_pass                   = 'rods',
-  $icat_admin_user                   = 'rods',
-  $icat_server                       = 'localhost',
-  $icat_server_zone                  = 'tempZone',
+  $provider_admin_pass                   = 'rods',
+  $provider_admin_user                   = 'rods',
+  $provider_server                       = 'localhost',
+  $provider_server_zone                  = 'tempZone',
   $schema_base_uri                   = 'file:///var/lib/irods/configuration_schemas',
   $srv_acct                          = 'irods',                                       # file & process owner
   $srv_grp                           = 'irods',                                       # file & process group

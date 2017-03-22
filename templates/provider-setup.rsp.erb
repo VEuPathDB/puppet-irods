@@ -4,23 +4,23 @@
 <%- if @db_vendor == 'postgres' -%>
 PostgreSQL
 <%- end -%>
-<%= scope['irods::icat::db_srv_host'] %>
-<%= scope['irods::icat::db_srv_port'] %>
-<%= scope['irods::icat::db_name'] %>
-<%= scope['irods::icat::db_user'] %>
+<%= scope['irods::provider::db_srv_host'] %>
+<%= scope['irods::provider::db_srv_port'] %>
+<%= scope['irods::provider::db_name'] %>
+<%= scope['irods::provider::db_user'] %>
 yes
-<%= scope['irods::icat::db_password'] %>
-<%= scope['irods::icat::db_password_salt'] %>
-<%= scope['irods::globals::icat_server_zone'] %>
+<%= scope['irods::provider::db_password'] %>
+<%= scope['irods::provider::db_password_salt'] %>
+<%= scope['irods::globals::provider_server_zone'] %>
 <%= scope['irods::globals::srv_port'] %>
 <%= scope['irods::globals::srv_port_range_start'] %>
 <%= scope['irods::globals::srv_port_range_end'] %>
 <%= scope['irods::globals::ctrl_plane_port'] %>
 <%= scope['irods::globals::schema_base_uri'] %>
-<%= scope['irods::globals::icat_admin_user'] %>
+<%= scope['irods::globals::provider_admin_user'] %>
 yes
 <%= scope['irods::globals::srv_zone_key'] %>
 <%= scope['irods::globals::srv_negotiation_key'] %>
 <%= scope['irods::globals::ctrl_plane_key'] %>
-<%= scope['irods::globals::icat_admin_pass'] %>
+<%= scope['irods::globals::provider_admin_pass'] %>
 <%= scope['irods::globals::default_vault_dir'] %>

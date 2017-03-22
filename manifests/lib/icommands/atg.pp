@@ -11,7 +11,7 @@ define irods::lib::icommands::atg (
 ) {
 
   $command = "iadmin atg ${group} ${user}"
-  $zone    = $::irods::globals::icat_server_zone
+  $zone    = $::irods::globals::provider_server_zone
 
   exec { $name:
     path        => '/usr/bin',

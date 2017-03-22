@@ -25,7 +25,7 @@ class irods::icommands (
   exec { 'irods_admin_iinit':
     path        => ['/usr/bin','/bin'],
     environment => ['HOME=/root'],
-    command     => "echo ${irods::globals::icat_admin_pass} | iinit",
+    command     => "echo ${irods::globals::provider_admin_pass} | iinit",
     unless      => 'iadmin lu > /dev/null 2>&1',
   }
 

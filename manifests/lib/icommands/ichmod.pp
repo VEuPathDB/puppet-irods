@@ -28,7 +28,7 @@ define irods::lib::icommands::ichmod (
 ) {
 
   $command = "ichmod ${option} ${action} ${user} ${collOrDataObj}"
-  $zone    = $::irods::globals::icat_server_zone
+  $zone    = $::irods::globals::provider_server_zone
 
   case $action {
     'inherit':   {

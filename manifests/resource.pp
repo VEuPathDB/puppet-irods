@@ -13,7 +13,8 @@ class irods::resource (
   Class['irods::resource::setup'] ->
   Irods::Lib::Ssl['resource']
 
-  $min_packages = ['irods-resource']
+  #  $min_packages = ['irods-resource']
+  $min_packages = ['irods-server', 'irods-icommands']
   if $install_dev_pkgs {
     $packages = concat($min_packages, ['irods-devel', 'irods-runtime'])
   } else {

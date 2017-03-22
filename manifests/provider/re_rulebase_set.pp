@@ -1,8 +1,8 @@
 # Mange the re_rulebase_set in /etc/irods/server_config.json
-class irods::icat::re_rulebase_set {
+class irods::provider::re_rulebase_set {
   include ::irods::params
 
-  $re_rulebase_set = $::irods::icat::re_rulebase_set
+  $re_rulebase_set = $::irods::provider::re_rulebase_set
   $server_config_json = $::irods::params::server_config_json
 
   $path = "dict/entry[.= 'plugin_configuration']/dict/entry[.= 'rule_engines']/array/dict/entry[.= 'plugin_specific_configuration']/dict/entry[.= 're_rulebase_set']"

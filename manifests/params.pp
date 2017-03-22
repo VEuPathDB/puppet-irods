@@ -1,6 +1,6 @@
 # Default parameters for iCAT or Resource servers. These are meant to be
-# overridden in irods::icat or irods::resource classes. See also the
-# irods::globals class for parameters that cross icat and resource class
+# overridden in irods::provider or irods::resource classes. See also the
+# irods::globals class for parameters that cross provider and resource class
 # boundaries.
 class irods::params inherits irods::globals {
 

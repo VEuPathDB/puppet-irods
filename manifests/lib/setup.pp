@@ -12,7 +12,7 @@ define irods::lib::setup (
 
   $staging_dir     = '/var/lib/irods/.puppetstaging'
   $setup_py        = '/var/lib/irods/scripts/setup_irods.py'
-  $db_vendor       = $::irods::icat::db_vendor
+  $db_vendor       = $::irods::provider::db_vendor
 
   file { $staging_dir:
     ensure => 'directory',
@@ -25,7 +25,7 @@ define irods::lib::setup (
     mode    => '0600',
   } ->
 
-  exec { 'irods-icat-setup':
+  exec { 'irods-provider-setup':
     path        => '/bin:/usr/bin:/sbin:/usr/sbin',
     command     => "python ${setup_py} < ${staging_dir}/${setup_rsp_file} > ${$staging_dir}/${setup_log_file} 2>&1",
     unless      => 'test -f /etc/irods/server_config.json'

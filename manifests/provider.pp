@@ -1,5 +1,5 @@
-# installs iCAT server
-class irods::icat (
+# installs provider server
+class irods::provider (
   String                            $core_version     = $irods::params::core_version,
   Enum['postgres','oracle','mysql'] $db_vendor        = $irods::params::db_vendor,
   String                            $db_name          = $irods::params::db_name,
@@ -14,14 +14,14 @@ class irods::icat (
 ) inherits irods::params {
 
   include ::irods::service
-  include ::irods::icat::re_rulebase_set
+  include ::irods::provider::re_rulebase_set
 
-  contain ::irods::icat::setup
+  contain ::irods::provider::setup
   
-  Irods::Lib::Install['icat'] ~>
-  Class['irods::icat::setup'] ->
-  Class['irods::icat::re_rulebase_set'] ->
-  Irods::Lib::Ssl['icat']
+  Irods::Lib::Install['provider'] ~>
+  Class['irods::provider::setup'] ->
+  Class['irods::provider::re_rulebase_set'] ->
+  Irods::Lib::Ssl['provider']
 
   $min_packages = ['irods-server', 'irods-runtime', 'irods-icommands', "irods-database-plugin-${db_vendor}"]
   if $install_dev_pkgs {
@@ -30,13 +30,13 @@ class irods::icat (
     $packages = $min_packages
   }
 
-  irods::lib::install { 'icat':
+  irods::lib::install { 'provider':
     packages     => $packages,
     core_version => $core_version,
   }
 
   if $use_ssl {
-    irods::lib::ssl { 'icat':
+    irods::lib::ssl { 'provider':
       ssl_certificate_chain_file_source => $irods::globals::ssl_certificate_chain_file_source,
       ssl_certificate_key_file_source   => $irods::globals::ssl_certificate_key_file_source,
     }
