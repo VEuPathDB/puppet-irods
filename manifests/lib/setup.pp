@@ -1,5 +1,5 @@
 # Run the iRODS interactive setup script, taking inputs from a response
-# file. The response file is different on iCAT and resource servers.
+# file. The response file is different on provider and consumer servers.
 #
 # Logging to $setup_log_file. The setup script also creates a log in
 # /var/lib/irods/log/setup_log.txt
