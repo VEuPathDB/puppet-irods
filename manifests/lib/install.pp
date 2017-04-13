@@ -33,7 +33,14 @@ define irods::lib::install (
     ensure => absent,
   } ->
   package { $install_pkgs:
-    ensure => $core_version,
+    ensure              => $core_version,
+    install_options     => [
+      {
+        '--disablerepo' => '*' ,
+        '--enablerepo'  => 'renci-irods'
+      }
+    ]
+
   }
 
 }
