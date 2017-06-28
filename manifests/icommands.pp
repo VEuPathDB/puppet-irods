@@ -29,5 +29,10 @@ class irods::icommands (
     unless      => 'iadmin lu > /dev/null 2>&1',
   }
 
+  file { '/etc/bash_completion.d/i-commands-auto.bash':
+    ensure => 'file',
+    source => 'puppet:///modules/irods/i-commands-auto.bash',
+    mode   => '0644',
+  }
 
 }
