@@ -3,14 +3,14 @@ class irods::yum::install {
   $gpg_key_path =  '/etc/pki/rpm-gpg/RPM-GPG-KEY-RENCI-IRODS'
 
   file { '/etc/yum.repos.d/renci-irods.repo':
-    source => 'https://packages.irods.org/renci-irods.yum.repo',
+    source => 'puppet:///modules/irods/renci-irods.yum.repo',
     owner  => 'root',
     group  => 'root',
     mode   => '0644',
   }
 
   file { $gpg_key_path:
-    source => 'https://packages.irods.org/irods-signing-key.asc',
+    source => 'puppet:///modules/irods/irods-signing-key.asc',
     owner  => 'root',
     group  => 'root',
     mode   => '0644',
