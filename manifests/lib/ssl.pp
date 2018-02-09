@@ -15,6 +15,7 @@ define irods::lib::ssl (
     'irods_ssl_certificate_chain_file' => '/etc/irods/ssl/server.crt',
     'irods_ssl_certificate_key_file'   => '/etc/irods/ssl/server.key',
     'irods_ssl_dh_params_file'         => '/etc/irods/ssl/dhparams.pem',
+    'irods_ssl_verify_server'          => 'cert',
     'irods_client_server_policy'       => 'CS_NEG_REQUIRE',
   }
 
