@@ -15,12 +15,14 @@ class irods::provider (
 
   include ::irods::service
   include ::irods::provider::re_rulebase_set
+  include ::irods::provider::python_plugin_config
 
   contain ::irods::provider::setup
   
   Irods::Lib::Install['provider'] ~>
   Class['irods::provider::setup'] ->
   Class['irods::provider::re_rulebase_set'] ->
+  Class['irods::provider::python_plugin_config'] ->
   Irods::Lib::Ssl['provider']
 
   $min_packages = ['irods-server', 'irods-runtime', 'irods-icommands', "irods-database-plugin-${db_vendor}"]
