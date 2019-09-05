@@ -25,7 +25,7 @@ class irods::provider (
   Class['irods::provider::python_plugin_config'] ->
   Irods::Lib::Ssl['provider']
 
-  $min_packages = ['irods-server', 'irods-runtime', 'irods-icommands', "irods-database-plugin-${db_vendor}"]
+  $min_packages = ['irods-server', 'irods-runtime', 'irods-icommands', "irods-database-plugin-${db_vendor}", "irods-rule-engine-plugin-python"]
   if $install_dev_pkgs {
     $packages = concat($min_packages, ['irods-devel'])
   } else {
