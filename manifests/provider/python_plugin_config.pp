@@ -18,4 +18,5 @@ class irods::provider::python_plugin_config {
   ],
     onlyif => "match ${path}/dict/entry[.= 'instance_name']/string[.= 'irods_rule_engine_plugin-python-instance'] size < 1"
   }
+}
 
